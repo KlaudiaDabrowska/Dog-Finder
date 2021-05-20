@@ -97,7 +97,6 @@ const goLeft=()=>{
             .then(data => {
                 for (let i = 0; i < data.length; i++) {
                     if (nameBreed.textContent === data[i].name) {
-                        console.log(data[8-1].name)
                         nameBreed.textContent = data[i-1].name;
                         if (data[i-1].image.height > data[i-1].image.width) {
                             img.style.backgroundImage = `url(${data[i-1].image.url})`;
@@ -127,8 +126,6 @@ const goRight=()=>{
             .then(data => {
                 for (let i = 0; i < data.length; i++) {
                     if (nameBreed.textContent === data[i].name) {
-                        console.log(data[8+1].name)
-                        console.log(data[9].name)
                         nameBreed.textContent = data[i+1].name;
                         if (data[i+1].image.height > data[i+1].image.width) {
                             img.style.backgroundImage = `url(${data[i+1].image.url})`;
@@ -145,8 +142,10 @@ const goRight=()=>{
                         }
                         height.textContent = `${data[i+1].height.metric} cm`;
                         weight.textContent = `${data[i+1].weight.metric} kg`;
+                        break;
                     }
                 }
+            
             })
 
 }
