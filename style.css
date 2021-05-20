@@ -95,7 +95,7 @@ button.breed {
 }
 
 .dog-info {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -142,6 +142,29 @@ div.img {
 .info-panel {
     margin: 15px auto;
 }
+
+button.left {
+    position: absolute;
+    top: 50%;
+    right: 97%;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, .65);
+}
+
+button.right {
+    position: absolute;
+    top: 50%;
+    left: 97%;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, .65);
+}
+
 
 p {
     font-weight: bold;

@@ -8,6 +8,8 @@ const height = document.querySelector(".height");
 const weight = document.querySelector(".weight");
 const pTemperament = document.querySelector(".tempero");
 const nameBreed = document.querySelector(".name");
+const leftBtn=document.querySelector(".left");
+const rightBtn=document.querySelector(".right");
 
 
 const dog = () => {
@@ -87,3 +89,67 @@ const closeInfo = () => {
 window.addEventListener("click", (e) => {
     e.target === shadow ? closeInfo() : false
 });
+
+
+const goLeft=()=>{
+    fetch(`https://api.TheDogAPI.com/v1/breeds`)
+            .then(res => res.json())
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    if (nameBreed.textContent === data[i].name) {
+                        console.log(data[8-1].name)
+                        nameBreed.textContent = data[i-1].name;
+                        if (data[i-1].image.height > data[i-1].image.width) {
+                            img.style.backgroundImage = `url(${data[i-1].image.url})`;
+                            img.style.backgroundSize = "contain";
+                        } else {
+                            img.style.backgroundImage = `url(${data[i-1].image.url})`;
+                        }
+                        img.alt = data[i-1].name;
+                        if (!data[i-1].temperament) {
+                            pTemperament.style.display = "none";
+                        } else {
+                            pTemperament.style.display = "block";
+                            temperament.textContent = data[i-1].temperament;
+                        }
+                        height.textContent = `${data[i-1].height.metric} cm`;
+                        weight.textContent = `${data[i-1].weight.metric} kg`;
+                    }
+                }
+            })
+        }
+
+
+
+const goRight=()=>{
+    fetch(`https://api.TheDogAPI.com/v1/breeds`)
+            .then(res => res.json())
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    if (nameBreed.textContent === data[i].name) {
+                        console.log(data[8+1].name)
+                        console.log(data[9].name)
+                        nameBreed.textContent = data[i+1].name;
+                        if (data[i+1].image.height > data[i+1].image.width) {
+                            img.style.backgroundImage = `url(${data[i+1].image.url})`;
+                            img.style.backgroundSize = "contain";
+                        } else {
+                            img.style.backgroundImage = `url(${data[i+1].image.url})`;
+                        }
+                        img.alt = data[i+1].name;
+                        if (!data[i+1].temperament) {
+                            pTemperament.style.display = "none";
+                        } else {
+                            pTemperament.style.display = "block";
+                            temperament.textContent = data[i+1].temperament;
+                        }
+                        height.textContent = `${data[i+1].height.metric} cm`;
+                        weight.textContent = `${data[i+1].weight.metric} kg`;
+                    }
+                }
+            })
+
+}
+
+leftBtn.addEventListener("click", goLeft);
+rightBtn.addEventListener("click", goRight);
