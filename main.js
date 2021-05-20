@@ -1,28 +1,30 @@
 const input=document.querySelector("input");
 const liElements=document.getElementsByTagName("li");
-const ul=document.querySelector("ul");
 const shadow= document.querySelector(".shadow-dog");
 const breedBtn=document.getElementsByClassName("breed");
-const dogInfo=document.querySelector(".dog-info")
+const img=document.querySelector(".img");
+const temperament=document.querySelector(".temperament");
+const height=document.querySelector(".height");
+const weight=document.querySelector(".weight");
+const pTemperament=document.querySelector(".tempero");
+const nameBreed=document.querySelector(".name");
 
 
 const dog=()=>{
-    fetch(`https://dog.ceo/api/breeds/list`)
-    .then(res => res.json())
-    .then(data => {
-        const names= data.message;
-        names.forEach(name =>{
-            const li= document.createElement('li')
-            ul.appendChild(li);
-            const breedBtn=document.createElement("button");
-            breedBtn.className="breed";
-            li.appendChild(breedBtn);
-            breedBtn.textContent=name.charAt(0).toUpperCase() + name.slice(1);
-            })
-    })
-}
+        fetch(`https://api.TheDogAPI.com/v1/breeds`)
+        .then(res => res.json())
+        .then(data => {
+            for(let i=0; i<data.length; i++){
+             const li= document.createElement('li')
+             document.querySelector("ul").appendChild(li);
+             const breedBtn=document.createElement("button");
+             breedBtn.className="breed";
+             li.appendChild(breedBtn);
+             breedBtn.textContent=data[i].name.charAt(0).toUpperCase() + data[i].name.slice(1);
+        }})}
 
 dog()
+
 
 const searchDog= (e) => {
     const text=e.target.value.toLowerCase();
@@ -35,7 +37,6 @@ const searchDog= (e) => {
         else{
             liElements[i].style.display="none";
         }
-        console.log(text)
     }
 }
 
@@ -46,16 +47,42 @@ const openInfo=()=>{
     shadow.style.display="flex";
 }
 
+
 document.body.addEventListener("click", function(e){
     if(e.target.className === "breed"){
         openInfo();
-    };
-});
-
-
-
+        fetch(`https://api.TheDogAPI.com/v1/breeds`)
+        .then(res => res.json())
+        .then(data => {
+            for(let i=0; i<data.length; i++){
+                if(e.target.textContent===data[i].name){
+                    nameBreed.textContent=data[i].name;
+                    if(data[i].image.height>data[i].image.width){
+                        img.style.backgroundImage=`url(${data[i].image.url})`;
+                        img.style.backgroundSize="contain";
+                    }
+                    else{
+                    img.style.backgroundImage=`url(${data[i].image.url})`;
+                    }
+                    img.alt=data[i].name;
+                    if(!data[i].temperament){
+                        pTemperament.style.display="none";
+                    }
+                    else{
+                        pTemperament.style.display="block";
+                        temperament.textContent=data[i].temperament;
+                    }
+                    height.textContent=`${data[i].height.metric} cm`;
+                    weight.textContent=`${data[i].weight.metric} kg`;
+                }
+            }
+        })
+    }
+})
+        
 const closeInfo=()=>{
     shadow.style.display="none";
+    img.src="";
 }
 
 window.addEventListener("click", (e)=>{
