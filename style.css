@@ -143,6 +143,23 @@ div.img {
     margin: 15px auto;
 }
 
+button.close {
+    position: absolute;
+    top: 1%;
+    left: 96%;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    transition: .1s;
+}
+
+button.close:hover {
+    font-size: 32px;
+    color: rgba(0, 0, 0, .65);
+}
+
 button.left {
     position: absolute;
     top: 50%;
@@ -151,8 +168,10 @@ button.left {
     border: none;
     font-size: 30px;
     cursor: pointer;
-    color: rgba(0, 0, 0, .65);
+    color: #44214f
 }
+
+
 
 button.right {
     position: absolute;
@@ -162,7 +181,12 @@ button.right {
     border: none;
     font-size: 30px;
     cursor: pointer;
-    color: rgba(0, 0, 0, .65);
+    color: #44214f
+}
+
+button.left:hover,
+button.right:hover {
+    color: #865f7f
 }
 
 
