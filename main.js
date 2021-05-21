@@ -8,8 +8,9 @@ const height = document.querySelector(".height");
 const weight = document.querySelector(".weight");
 const pTemperament = document.querySelector(".tempero");
 const nameBreed = document.querySelector(".name");
-const leftBtn=document.querySelector(".left");
-const rightBtn=document.querySelector(".right");
+const leftBtn = document.querySelector(".left");
+const rightBtn = document.querySelector(".right");
+const closeBtn= document.querySelector(".close");
 
 
 const dog = () => {
@@ -81,9 +82,14 @@ document.body.addEventListener("click", function (e) {
     }
 })
 
+
 const closeInfo = () => {
     shadow.style.display = "none";
-    img.src = "";
+    img.style.backgroundImage="";
+    nameBreed.textContent="";
+    temperament.textContent="";
+    height.textContent="";
+    weight.textContent="";
 }
 
 window.addEventListener("click", (e) => {
@@ -91,64 +97,106 @@ window.addEventListener("click", (e) => {
 });
 
 
-const goLeft=()=>{
+const main = (number) => {
     fetch(`https://api.TheDogAPI.com/v1/breeds`)
-            .then(res => res.json())
-            .then(data => {
-                for (let i = 0; i < data.length; i++) {
-                    if (nameBreed.textContent === data[i].name) {
-                        nameBreed.textContent = data[i-1].name;
-                        if (data[i-1].image.height > data[i-1].image.width) {
-                            img.style.backgroundImage = `url(${data[i-1].image.url})`;
-                            img.style.backgroundSize = "contain";
-                        } else {
-                            img.style.backgroundImage = `url(${data[i-1].image.url})`;
-                        }
-                        img.alt = data[i-1].name;
-                        if (!data[i-1].temperament) {
-                            pTemperament.style.display = "none";
-                        } else {
-                            pTemperament.style.display = "block";
-                            temperament.textContent = data[i-1].temperament;
-                        }
-                        height.textContent = `${data[i-1].height.metric} cm`;
-                        weight.textContent = `${data[i-1].weight.metric} kg`;
+        .then(res => res.json())
+        .then(data => {
+            for (let i = 0; i < data.length; i++) {
+                if (nameBreed.textContent === data[i].name) {
+                    nameBreed.textContent = data[i-number].name;
+                    if (data[i-number].image.height > data[i-number].image.width) {
+                        img.style.backgroundImage = `url(${data[i-number].image.url})`;
+                        img.style.backgroundSize = "contain";
+                    } else {
+                        img.style.backgroundImage = `url(${data[i-number].image.url})`;
                     }
-                }
-            })
-        }
-
-
-
-const goRight=()=>{
-    fetch(`https://api.TheDogAPI.com/v1/breeds`)
-            .then(res => res.json())
-            .then(data => {
-                for (let i = 0; i < data.length; i++) {
-                    if (nameBreed.textContent === data[i].name) {
-                        nameBreed.textContent = data[i+1].name;
-                        if (data[i+1].image.height > data[i+1].image.width) {
-                            img.style.backgroundImage = `url(${data[i+1].image.url})`;
-                            img.style.backgroundSize = "contain";
-                        } else {
-                            img.style.backgroundImage = `url(${data[i+1].image.url})`;
-                        }
-                        img.alt = data[i+1].name;
-                        if (!data[i+1].temperament) {
-                            pTemperament.style.display = "none";
-                        } else {
-                            pTemperament.style.display = "block";
-                            temperament.textContent = data[i+1].temperament;
-                        }
-                        height.textContent = `${data[i+1].height.metric} cm`;
-                        weight.textContent = `${data[i+1].weight.metric} kg`;
-                        break;
+                    img.alt = data[i - number].name;
+                    if (!data[i - number].temperament) {
+                        pTemperament.style.display = "none";
+                    } else {
+                        pTemperament.style.display = "block";
+                        temperament.textContent = data[i - number].temperament;
                     }
+                    height.textContent = `${data[i-number].height.metric} cm`;
+                    weight.textContent = `${data[i-number].weight.metric} kg`;
+                    break;
                 }
-            
-            })
 
+            }
+        })
 }
+
+
+
+const goLeft = () => {
+    main(1);
+}
+
+const goRight = () => {
+    main(-1)
+}
+
+
+
+// const goLeft=()=>{
+//     fetch(`https://api.TheDogAPI.com/v1/breeds`)
+//             .then(res => res.json())
+//             .then(data => {
+//                 for (let i = 0; i < data.length; i++) {
+//                     if (nameBreed.textContent === data[i].name) {
+//                         nameBreed.textContent = data[i-1].name;
+//                         if (data[i-1].image.height > data[i-1].image.width) {
+//                             img.style.backgroundImage = `url(${data[i-1].image.url})`;
+//                             img.style.backgroundSize = "contain";
+//                         } else {
+//                             img.style.backgroundImage = `url(${data[i-1].image.url})`;
+//                         }
+//                         img.alt = data[i-1].name;
+//                         if (!data[i-1].temperament) {
+//                             pTemperament.style.display = "none";
+//                         } else {
+//                             pTemperament.style.display = "block";
+//                             temperament.textContent = data[i-1].temperament;
+//                         }
+//                         height.textContent = `${data[i-1].height.metric} cm`;
+//                         weight.textContent = `${data[i-1].weight.metric} kg`;
+//                     }
+//                 }
+//             })
+//         }
+
+
+
+// const goRight=()=>{
+//     fetch(`https://api.TheDogAPI.com/v1/breeds`)
+//             .then(res => res.json())
+//             .then(data => {
+//                 for (let i = 0; i < data.length; i++) {
+//                     if (nameBreed.textContent === data[i].name) {
+//                         nameBreed.textContent = data[i+1].name;
+//                         if (data[i+1].image.height > data[i+1].image.width) {
+//                             img.style.backgroundImage = `url(${data[i+1].image.url})`;
+//                             img.style.backgroundSize = "contain";
+//                         } else {
+//                             img.style.backgroundImage = `url(${data[i+1].image.url})`;
+//                         }
+//                         img.alt = data[i+1].name;
+//                         if (!data[i+1].temperament) {
+//                             pTemperament.style.display = "none";
+//                         } else {
+//                             pTemperament.style.display = "block";
+//                             temperament.textContent = data[i+1].temperament;
+//                         }
+//                         height.textContent = `${data[i+1].height.metric} cm`;
+//                         weight.textContent = `${data[i+1].weight.metric} kg`;
+//                         break;
+//                     }
+//                 }
+
+//             })
+
+// }
 
 leftBtn.addEventListener("click", goLeft);
 rightBtn.addEventListener("click", goRight);
+closeBtn.addEventListener("click", closeInfo);
