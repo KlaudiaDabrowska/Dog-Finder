@@ -65,7 +65,6 @@ const openInfo = () => {
     shadow.style.display = "flex";
 }
 
-
 document.body.addEventListener("click", function (e) {
     if (e.target.className === "breed") {
         openInfo();
@@ -129,6 +128,26 @@ const canGoNext = () => {
 
 const canGoBack = () => {
     return currentDogIndex !== 0;
+}
+
+const changeDog = (dog) => {
+    nameBreed.textContent = dog.name;
+    if (dog.image.height > dog.image.width) {
+        img.style.backgroundImage = `url(${dog.image.url})`;
+        img.style.backgroundSize = "contain";
+    } else {
+        img.style.backgroundImage = `url(${dog.image.url})`;
+    }
+    img.alt = dog.name;
+    if (!dog.temperament) {
+        pTemperament.style.display = "none";
+    } else {
+        pTemperament.style.display = "block";
+        temperament.textContent = dog.temperament;
+    }
+    height.textContent = `${dog.height.metric} cm`;
+    weight.textContent = `${dog.weight.metric} kg`;
+    displayOrHideArrows()
 }
 
 const changeDog = (dog) => {
