@@ -221,7 +221,7 @@ span {
     letter-spacing: 2px;
 }
 
-@media(min-width: 360px) {
+@media(max-width: 360px) {
     .header {
         height: 380px;
     }
