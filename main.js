@@ -70,7 +70,6 @@ document.body.addEventListener("click", function (e) {
     if (e.target.className === "breed") {
         openInfo();
         const dog = findDogById(Number(e.target.id))
-        console.log(currentDogIndex)
         nameBreed.textContent = dog.name;
         if (dog.image.height > dog.image.width) {
             img.style.backgroundImage = `url(${dog.image.url})`;
@@ -177,7 +176,6 @@ const goRight = () => {
 const showRandomDog=()=>{
     openInfo();
     const random= dogs[Math.floor(Math.random() * dogs.length)];
-    console.log(random);
     nameBreed.textContent=random.name;
     if (random.image.height > random.image.width) {
         img.style.backgroundImage = `url(${random.image.url})`;
