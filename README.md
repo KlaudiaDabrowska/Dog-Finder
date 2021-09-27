@@ -10,7 +10,6 @@ Search engine for dogs with their photos
 This project is simple search engine for dog breeds. 
 When you click on the dog breed, a modal with basic information like: the dog's temperament, height and weight appears. 
 Data about breeds is from free API dog.
-Project is still being developed.
 
 ## Technologies
 Project is created with:
